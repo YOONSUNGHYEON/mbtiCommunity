@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import lombok.Getter;
 
 @Entity(name="BoardOption")
-@Table(name = "tBoardOption")
+@Table(name = "tBoardListOption")
 @Getter
 public class BoardOption {
 	@Id

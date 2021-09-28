@@ -5,10 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 public class BoardController {
 
-	@GetMapping("/board")
+	@GetMapping("/boards")
 	public String index(Model model) {
 		model.addAttribute("message", "좋은 아침");
-
 		return "index";
 	}
 }

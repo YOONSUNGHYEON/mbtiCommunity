@@ -1,55 +1,57 @@
 $(window).load(function() {
-    checkSession();
 	getMbtiList();
 });
 
-function checkSession(){
+function checkSession() {
 	$.ajax({
 		type: 'GET',
 		url: "UserController.php?method=session",
 		dataType: "text",
 		success: function(bSession) {
-			if(bSession==true) {
-				location.href='./index.php';
+			if (bSession == true) {
+				location.href = './index.php';
 			}
 		}
 	});
 }
 function register() {
-	const registerForm = $('#registerForm').serialize();
-	 $.ajax({
-            url: "UserController.php?method=register",
-            type: "POST",
-            data: registerForm, // data에 바로 serialze한 데이터를 넣는다.
-            success: function(result){
-				if(result!="") {
-					alert(result);
-				}
-				else {
-					alert('회원가입 성공!');
-					location.href='./login.php';
-				}
-            },
-            error: function (request, status, error){        
-
-            }
-        }) 
-}
-function getMbtiList() {	
+	let registerForm = {
+		id: $("#id").val(),
+		password: $("#password").val(),
+		password2: $("#password2").val(),
+		mbtiOption: $("#mbtiOptionSelect option:selected").val()
+	};
 	$.ajax({
-		type: 'GET',
-		url: "MbtiController.php?method=getMbtiList",
+		url: "api/register",
+		type: "POST",
 		dataType: "json",
-		success: function(data) {		
-			let option = "";
-			for(let i = 1; i<data.length; i++) {				
-				option += '<option id="' + data[i]['nMbtiSeq']+'"';
-				option += ' name="'+ data[i]['nMbtiSeq']+'"';
-				option += ' value = "' + data[i]['nMbtiSeq']+'">';
-				option += data[i]['sName'] + '</option>';
+		data: JSON.stringify(registerForm),
+		contentType: "application/json",
+		async: true,
+		success: function(result) {
+			if(result['code']=='400') {
+				alert(result['message']);
+				location.href='/register';
 			}
-	
-			$("#mbtiOptionSelect").html(option);
+			else {
+				alert(result['message']);
+				location.href='/login';
+			}
+		},
+		error: function(request, status, error) {
+
 		}
-	});
+	})
+}
+function getMbtiList() {
+	$.getJSON('/api/mbtiOptions', function(mbtiOptionList) {
+		let option = "";
+		$.each(mbtiOptionList, function(index, item) {
+			option += '<option id="' + item["seq"] + '"';
+			option += ' name="' + item["seq"] + '"';
+			option += ' value = "' + item["seq"] + '">';
+			option += item["name"] + '</option>';
+		});
+		$("#mbtiOptionSelect").html(option);
+	})
 }

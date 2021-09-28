@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.yoon.mbtiCommunity.DTO.MemberDTO;
+
 import lombok.Getter;
 
 
@@ -36,4 +38,21 @@ public class Member {
 
 
     public Member() { }
+
+
+	public Member(MemberDTO memberDTO) {
+		this.seq = memberDTO.getSeq();
+		this.id = memberDTO.getId();
+		this.password = memberDTO.getPassword();
+		this.joinDate = memberDTO.getJoinDate();
+		this.mbtiOption = memberDTO.getMbtiOption();
+	}
+
+
+	public Member(String id, String password, String joinDate, MbtiOption mbtiOption) {
+		this.id = id;
+		this.password = password;
+		this.joinDate =joinDate;
+		this.mbtiOption = mbtiOption;
+	}
 }

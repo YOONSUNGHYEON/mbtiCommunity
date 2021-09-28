@@ -18,10 +18,11 @@ public class MemberController {
 		return "login";
 	}
 
-	@GetMapping("/members")
-	public String register(Model model) {
+	@GetMapping("/register")
+	public String register() {
 
 		return "register";
 	}
+
 
 }
