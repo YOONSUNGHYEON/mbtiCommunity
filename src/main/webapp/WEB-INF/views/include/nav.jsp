@@ -4,7 +4,5 @@
 		<hr />
 		<div id="login-logout-register"></div>
 		<hr />
-
-
 	</div>
 </nav>

@@ -1,5 +1,14 @@
 package com.yoon.mbtiCommunity.DTO;
 
-public class MemberDTO {
+import com.yoon.mbtiCommunity.Entity.MbtiOption;
 
+import lombok.Data;
+
+@Data
+public class MemberDTO {
+	 private int seq;
+	 private String id;
+	 private String password;
+	 private String joinDate;
+	 private MbtiOption mbtiOption;
 }

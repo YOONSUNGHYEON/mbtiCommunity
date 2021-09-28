@@ -12,23 +12,23 @@ import javax.persistence.Table;
 import lombok.Getter;
 
 
-@Entity(name = "tMemberList")
+@Entity(name = "Member")
 @Table(name = "tMemberList")
 @Getter
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int memberSeq;
+    @Column(name = "nMemberSeq", nullable = false)
+    private int seq;
 
-    @Column(unique = true)
-    @JoinColumn(name = "sID", nullable = false)
-    private String memberId;
+    @Column(name = "sID", nullable = false, unique = true)
+    private String id;
 
-    @JoinColumn(name = "sPassword", nullable = false)
-    private String memberPassword;
+    @Column(name = "sPassword", nullable = false)
+    private String password;
 
-    @JoinColumn(name = "dtJoinDate", nullable = false)
-    private String memberdJoinDate ;
+    @Column(name = "dtJoinDate", nullable = false)
+    private String joinDate ;
 
     @ManyToOne
     @JoinColumn(name = "nMbtiOptionSeq", nullable = false)
